@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Day3_intArray_20220421/1.0.0": {
+        "runtime": {
+          "Day3_intArray_20220421.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Day3_intArray_20220421/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
