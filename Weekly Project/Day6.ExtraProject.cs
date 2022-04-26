@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Day6.ExtraProject
@@ -10,45 +10,22 @@ namespace Day6.ExtraProject
             Console.WriteLine("Book List!");
 
             //List//
-            List<string> bookAuthors = new List<string>();
-            bookAuthors.Add("William Shakespeare");
-            bookAuthors.Add("Georges Simenon");
-
-            List<string> bookNames = new List<string>();
-            bookNames.Add("Pilots Of Next Year");
-            bookNames.Add("Creation Of The World");
-
-            List<string> bookPage = new List<string>();
-            bookPage.Add("500");
-            bookPage.Add("298");
-
-            Console.WriteLine("--BookAuthor--");
-            foreach (string bookAuthor in bookAuthors)
-            {
-                Console.WriteLine(bookAuthor);
-            }
-            Console.WriteLine("--BookName--");
-
-            foreach (string bookName in bookNames)
-            {
-               
-                Console.WriteLine(bookName);
-            }
-            Console.WriteLine("--BookPages--");
-
-            foreach (string bookPages in bookPage)
-            {
-
-                Console.WriteLine(bookPages);
-            }
-
+            List<Book> book = new List<Book>();
 
             Book number1 = new Book("J. K. Rowling", "Harry Potter the Sorcerer's Stone", 223);
             Book number2 = new Book("Gabriel García Márquez", "One Hundred Years of Solitude", 202);
+            book.Add(number1);
+            book.Add(number2);
 
-            Console.WriteLine("---- Book list by String ----");
-            Console.WriteLine(number1.toString());
-            Console.WriteLine(number2.toString());
+            Console.WriteLine("-------");
+            foreach (var item in book)
+            {
+                Console.WriteLine("*"+ item.toString());
+            }
+  
+            //Console.WriteLine("---- Book list by String ----");
+            //Console.WriteLine(number1.toString());
+            //Console.WriteLine(number2.toString());
         }
     }
 
