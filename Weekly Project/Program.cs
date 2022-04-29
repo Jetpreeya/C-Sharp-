@@ -9,14 +9,14 @@ namespace CheckPoint2
         static void Main(string[] args)
         {
             Console.WriteLine("Add a product and exit with q!");
-            //List 
-            //List<Products> product = new List<Products>();
+            //List Level 1 
             int index = 0;
             string[] myCategory = new string[10];
             string[] myProducts = new string[10];
             int[] myPrice = new int[10];
             while (true)
             {
+                { 
                 Console.Write("Add a category:");
                 string data = Console.ReadLine();
                 if (data.ToLower().Trim() == "q") //exit with type q
@@ -25,56 +25,75 @@ namespace CheckPoint2
                 }
                 myCategory[index] = data;
                 index++;
-
+                }
+                { 
                 Console.Write("Add a product:");
                 string product = Console.ReadLine();
-                if (data.ToLower().Trim() == "q") //exit with type q
+                if (product.ToLower().Trim() == "q") //exit with type q
                 {
                     break;
                 }
                 myProducts[index] = product;
                 index++;
-
+                }
+                { 
                 Console.Write("Add a price:");
-                int price = Convert.ToInt32(Console.ReadLine());
-                if (data.ToLower().Trim() == "q") //exit with type q
+                string Products = Console.ReadLine();
+                //int price = Convert.ToInt32(Console.ReadLine());
+                //Check that user input price as a number or not   //Level 3 
+                bool isInt = int.TryParse(Products, out int prices);
+                if (isInt)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"{Products} is a number");
+                    Array.Resize(ref myProducts, index + 1);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{Products} is NOT a number");
+                }
+                Console.ResetColor();
+                if (Products.ToLower().Trim() == "q") //exit with type q
                 {
                     break;
                 }
-                myPrice[index] = price;
-                index++;
+                }
+
+                // input then show information from user
+                Array.Resize(ref myCategory, index);
+                Console.WriteLine("My Category List");
+                Console.WriteLine("---------------");
+                Console.WriteLine("Category".PadRight(10) + "Brand".PadRight(10) + "Price".PadRight(10));
+                for (int i = 0; i < myCategory.Length; i++)
+                {
+                    Console.WriteLine(myCategory[i]);
+                }
+                //Show the Products list
+                Array.Resize(ref myProducts, index);
+                Console.WriteLine("My Products List");
+                Console.WriteLine("---------------");
+                for (int i = 0; i < myProducts.Length; i++)
+                {
+                    Console.WriteLine(myProducts[i]);
+                }
+
+                //Show the Price list
+                Array.Resize(ref myPrice, index);
+                Console.WriteLine("My Price List");
+                Console.WriteLine("---------------");
+                for (int i = 0; i < myPrice.Length; i++)
+                {
+                    Console.WriteLine(myPrice[i]);
+                }
+
+                //Show the Products list
             }
 
-            //Show the Category list
-            Array.Resize(ref myCategory, index);
-            Console.WriteLine("My Category List");
-            Console.WriteLine("---------------");
-            Console.WriteLine("Category".PadRight(10) + "Brand".PadRight(10) + "Price".PadRight(10));
-            for (int i = 0; i < myCategory.Length; i++)
-            {
-                Console.WriteLine(myCategory[i]);
-            }
             //Show the Products list
-            Array.Resize(ref myProducts, index);
-            Console.WriteLine("My Products List");
-            Console.WriteLine("---------------");
-            for (int i = 0; i < myProducts.Length; i++)
-            {
-                Console.WriteLine(myProducts[i]);
-            }
-
-            //Show the Price list
-            Array.Resize(ref myPrice, index);
-            Console.WriteLine("My Price List");
-            Console.WriteLine("---------------");
-            for (int i = 0; i < myPrice.Length; i++)
-            {
-                Console.WriteLine(myPrice[i]);
-            }
-
             {
                 List<Products> products = new List<Products>();
-                Products products1 = new Products("Food","Rice", 22);
+                Products products1 = new Products("Food","Rice", 28);
                 products.Add(products1);
 
                 products.Add(new Products("Car", "Saab", 19500));
@@ -105,15 +124,18 @@ namespace CheckPoint2
 
                 List<Products> sortedProduct = products.OrderBy(product => product.Price).ToList();
                 Console.WriteLine("Category".PadRight(10) + "|" + "Brand".PadRight(10) + "|"  + "Price".PadRight(10));
-                foreach (Products product in sortedProduct)
+                foreach (var product in sortedProduct) 
                 {
                     Console.WriteLine(product.Category.PadRight(10) +"|"+ product.Brand.PadRight(10) + "|" + product.Price.ToString().PadRight(10));
                 }
 
                 {
                 Console.WriteLine("___________________________________");
-                Console.WriteLine("Total Sum is " + products.Sum(car => car.Price)); // Summary process
+                Console.WriteLine("Total Sum is " + products.Sum(product => product.Price)); // Summary process Level 2 
+                Console.WriteLine("___________________________________");
                 }
+                Console.WriteLine("Press enter to continue...");
+                Console.ReadLine();
 
             }
         }
