@@ -36,20 +36,17 @@ namespace Friday_CheckPoint2
 
                 Console.WriteLine("____________________________");
                 Console.WriteLine("Category".PadRight(10) + "Brand".PadRight(10) + "Price".PadRight(10));
-                Console.WriteLine("____________________________");
-                foreach (Products item in Pr)
-                {
-                    Console.WriteLine(item.Category.PadRight(10) + item.Brand.PadRight(10) + item.Price.ToString().PadRight(10));
-                }
 
+                List<Products> sortedProduct = Pr.OrderBy(item => item.Price).ToList(); // List from lower price to higher price
                 //Sum of the products
+                int sumOfAllPrice = Pr.Sum(product => product.Price);
                 Console.WriteLine("____________________________");
-                Console.WriteLine("The sum of all products");
-                Console.WriteLine("Price".PadRight(10));
-                foreach (Products item in Pr)
+                foreach (var product in sortedProduct)
                 {
-                    Console.WriteLine(item.Price.ToString().PadRight(10));
+                    Console.WriteLine(product.Category.PadRight(10) + "|" + product.Brand.PadRight(10) + "|" + product.Price.ToString().PadRight(10));
                 }
+                Console.WriteLine("____________________________");
+                Console.WriteLine("Total Sum is " + Pr.Sum(product => product.Price));
             }
         }
         class Products
