@@ -26,12 +26,12 @@ namespace MiniProject1
             //Console.WriteLine(ct3.Type.PadRight(10) + " |" + ct3.Brand.PadRight(10) + " |" + ct3.Model.PadRight(20) + " |" + ct3.Office.PadRight(10) + " |" + ct3.Year.ToString().PadRight(15) + " |" + ct3.Price.ToString().PadRight(15) + " |" + ct3.Currency.PadRight(15) + " |" + ct3.LocalPrice);
 
             List<Function> ts = new List<Function>(); // The second way to do is Created a list and Add // 
-            Phone p1 = new Phone("Phone", "Iphone", "8", "Spain", 2018, 970, "EUR", 801.65);
-            Phone p2 = new Phone("Phone", "Samsung", "Note 10", "Korea", 2022, 450, "EUR", 4443.24);
-            Phone p3 = new Phone("Phone", "Nokia", "3310", "Finland", 2017, 59, "USD", 590);
-            Computer ct1 = new Computer("Computer", "MacBook", "Apple MacBook Air", "USA", 2022, 1150, "EUR", 11488);
-            Computer ct2 = new Computer("Computer", "ASUS", "VivoBook", "Taiwan", 2022, 600, "USD", 5590);
-            Computer ct3 = new Computer("Computer", "Lenovo", "ThinkPad L480", "China", 2018, 9000, "SEK", 9521.55);
+            Phone p1 = new Phone("Phone", "Iphone", "8", "Spain", Convert.ToDateTime("2022-10-11"), 970, "EUR", 801.65);
+            Phone p2 = new Phone("Phone", "Samsung", "Note 10", "Korea", Convert.ToDateTime("2022-09-11"), 450, "EUR", 4443.24);
+            Phone p3 = new Phone("Phone", "Nokia", "3310", "Finland", Convert.ToDateTime("2017-03-25"), 59, "USD", 590);
+            Computer ct1 = new Computer("Computer", "MacBook", "Apple MacBook Air", "USA", Convert.ToDateTime("2000-12-07"), 1150, "EUR", 11488);
+            Computer ct2 = new Computer("Computer", "ASUS", "VivoBook", "Taiwan", Convert.ToDateTime("2022-04-18"), 600, "USD", 5590);
+            Computer ct3 = new Computer("Computer", "Lenovo", "ThinkPad L480", "China", Convert.ToDateTime("2018-11-02"), 9000, "SEK", 9521.55);
             ts.Add(p1);
             ts.Add(p2);
             ts.Add(p3);
@@ -53,6 +53,7 @@ namespace MiniProject1
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString().PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
             }
+
             //Level 2 : Sorted by purchase date
             List<Function> sortedDate = ts.OrderBy(any => any.Year).ToList();
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
@@ -72,14 +73,14 @@ namespace MiniProject1
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Office { get; set; }
-        public int Year { get; set; }
+        public DateTime Year { get; set; }
         public int Price { get; set; }
         public string Currency { get; set; }
         public double LocalPrice { get; set; }
     }
     class Phone : Function  // inherits from Function
     {
-        public Phone(string type, string brand, string model, string office, int year, int price, string currency, double localPrice)
+        public Phone(string type, string brand, string model, string office, DateTime year, int price, string currency, double localPrice)
         {
             Type = type;
             Brand = brand;
@@ -94,7 +95,7 @@ namespace MiniProject1
 
     class Computer : Function  // inherits from Function
     {
-        public Computer(string type, string brand, string model, string office, int year, int price, string currency, double localPrice)
+        public Computer(string type, string brand, string model, string office, DateTime year, int price, string currency, double localPrice)
         {
             Type = type;
             Brand = brand;
