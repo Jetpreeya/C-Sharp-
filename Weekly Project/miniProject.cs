@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +9,9 @@ namespace MiniProject1
         static void Main(string[] args)
         {
             Console.WriteLine("Mini Project 1");
-            Console.WriteLine("----------------------------------------------------------------------------------------------");
-            Console.WriteLine("Type".PadRight(10) + " |"+ "Brand".PadRight(10) + " |" + "Model".PadRight(20) + " |" + "Office".PadRight(10) + " |" + "Purchase Date".PadRight(15) + " |" + "Price in USD".PadRight(15) + " |" + "Currency".PadRight(15) + " |" + "Local Price Today");
-            Console.WriteLine("----------------------------------------------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Type".PadRight(10) + " |" + "Brand".PadRight(10) + " |" + "Model".PadRight(20) + " |" + "Office".PadRight(10) + " |" + "Purchase Date".PadRight(15) + " |" + "Price in USD".PadRight(15) + " |" + "Currency".PadRight(15) + " |" + "Local Price Today");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
             //Phone p1 = new Phone("Phone","Iphone", "8","Spain", 2018, 970,"EUR",801.65);
             //Phone p2 = new Phone("Phone", "Samsung", "Note 10", "Korea", 2022, 450, "EUR", 4443.24);
             //Phone p3 = new Phone("Phone", "Nokia", "3310", "Finland", 2017, 59, "USD", 590);
@@ -24,7 +24,7 @@ namespace MiniProject1
             //Console.WriteLine(p3.Type.PadRight(10) + " |" + p3.Brand.PadRight(10) + " |" + p3.Model.PadRight(20) + " |" + p3.Office.PadRight(10) + " |" + p3.Year.ToString().PadRight(15) + " |" + p3.Price.ToString().PadRight(15) + " |" + p3.Currency.PadRight(15) + " |" + p3.LocalPrice);
             //Console.WriteLine(ct2.Type.PadRight(10) + " |" + ct2.Brand.PadRight(10) + " |" + ct2.Model.PadRight(20) + " |" + ct2.Office.PadRight(10) + " |" + ct2.Year.ToString().PadRight(15) + " |" + ct2.Price.ToString().PadRight(15) + " |" + ct2.Currency.PadRight(15) + " |" + ct2.LocalPrice);
             //Console.WriteLine(ct3.Type.PadRight(10) + " |" + ct3.Brand.PadRight(10) + " |" + ct3.Model.PadRight(20) + " |" + ct3.Office.PadRight(10) + " |" + ct3.Year.ToString().PadRight(15) + " |" + ct3.Price.ToString().PadRight(15) + " |" + ct3.Currency.PadRight(15) + " |" + ct3.LocalPrice);
-            
+
             List<Function> ts = new List<Function>(); // The second way to do is Created a list and Add // 
             Phone p1 = new Phone("Phone", "Iphone", "8", "Spain", 2018, 970, "EUR", 801.65);
             Phone p2 = new Phone("Phone", "Samsung", "Note 10", "Korea", 2022, 450, "EUR", 4443.24);
@@ -43,14 +43,27 @@ namespace MiniProject1
                 Console.WriteLine(a.Type.PadRight(10) + " |" + a.Brand.PadRight(10) + " |" + a.Model.PadRight(20) + " |" + a.Office.PadRight(10) + " |" + a.Year.ToString().PadRight(15) + " |" + a.Price.ToString().PadRight(15) + " |" + a.Currency.PadRight(15) + " |" + a.LocalPrice);
             }
 
-            //Filter by less than 3 months 
-
-            List<Function> filteredCars = ts.Where(ts => ts.Year >= 2020 && ts.Year <= 2019).ToList();
-            foreach (Function b in filteredCars)
+            //Level 2 : Sort by Type of the product (computers first, then phones)
+            List<Function> sortedType = ts.OrderBy(any => any.Type).ToList();
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Sort List by Type");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
+            foreach (Function b in sortedType)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(b.Brand.PadRight(10) + b.Model.PadRight(10) + b.Year.ToString().PadRight(10) + b.Price);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString().PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
             }
+            //Level 2 : Sorted by purchase date
+            List<Function> sortedDate = ts.OrderBy(any => any.Year).ToList();
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Sort List by Date");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------");
+            foreach (Function b in sortedDate)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString().PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
+            }
+            //Filter by less than 3 months
         }
     }
     class Function // Function is the main Class
@@ -66,7 +79,7 @@ namespace MiniProject1
     }
     class Phone : Function  // inherits from Function
     {
-        public Phone(string type,string brand, string model, string office , int year, int price, string currency, double localPrice)
+        public Phone(string type, string brand, string model, string office, int year, int price, string currency, double localPrice)
         {
             Type = type;
             Brand = brand;
