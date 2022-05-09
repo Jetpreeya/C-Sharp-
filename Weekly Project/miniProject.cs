@@ -39,7 +39,6 @@ namespace MiniProject_AssetTracking
             Console.WriteLine("----------------------------------------------------------------------------------------------------------");
             foreach (Function b in sortedType)
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
@@ -56,6 +55,15 @@ namespace MiniProject_AssetTracking
                 Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
+            Console.WriteLine("----------------------------------------------------------------------------------------------------------");
+            foreach (Function b in sortedDate) // Items *Yellow* if date less than 6 months away from 3 years
+            {
+                bool test = b.Year > DateTime.Now.AddYears(-6).AddMonths(3);
+                if (test) Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice.ToString("C"));
+                Console.ResetColor();
+            }
+
             // Sorted first by office
             List<Function> sortedOffice = ts.OrderBy(any => any.Office).ToList();
             Console.WriteLine("----------------------------------------------------------------------------------------------------------");
@@ -66,7 +74,8 @@ namespace MiniProject_AssetTracking
                 Console.WriteLine(c.Type.PadRight(10) + " |" + c.Brand.PadRight(10) + " |" + c.Model.PadRight(20) + " |" + c.Office.PadRight(10) + " |" + c.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + c.Price.ToString().PadRight(15) + " |" + c.Currency.PadRight(15) + " |" + c.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
-            // Level 3 
+
+            // Level 3 Currency
             List<Currency> showCurrency = new List<Currency>();
             Currency c1 = new Currency("Spain","EUR", 801.65,"USD", 845.12);
             Currency c2 = new Currency("Sweden", "SEK", 50.65,"USD", 5.06);
