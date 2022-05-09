@@ -29,7 +29,7 @@ namespace MiniProject_AssetTracking
 
             foreach (Function a in ts)
             {
-                Console.WriteLine(a.Type.PadRight(10) + " |" + a.Brand.PadRight(10) + " |" + a.Model.PadRight(20) + " |" + a.Office.PadRight(10) + " |" + a.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + a.Price.ToString().PadRight(15) + " |" + a.Currency.PadRight(15) + " |" + a.LocalPrice);
+                Console.WriteLine(a.Type.PadRight(10) + " |" + a.Brand.PadRight(10) + " |" + a.Model.PadRight(20) + " |" + a.Office.PadRight(10) + " |" + a.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + a.Price.ToString().PadRight(15) + " |" + a.Currency.PadRight(15) + " |" + a.LocalPrice.ToString("C"));
             }
 
             //Level 2 : Sort by Type of the product (computers first, then phones)
@@ -40,7 +40,7 @@ namespace MiniProject_AssetTracking
             foreach (Function b in sortedType)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
+                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
 
@@ -53,7 +53,7 @@ namespace MiniProject_AssetTracking
             {
                 bool test = b.Year > DateTime.Now.AddYears(-3).AddMonths(3);
                 if (test) Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
+                Console.WriteLine(b.Type.PadRight(10) + " |" + b.Brand.PadRight(10) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(10) + " |" + b.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + b.Price.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
             // Sorted first by office
@@ -63,18 +63,29 @@ namespace MiniProject_AssetTracking
             Console.WriteLine("----------------------------------------------------------------------------------------------------------");
             foreach (Function c in sortedOffice)
             {
-                Console.WriteLine(c.Type.PadRight(10) + " |" + c.Brand.PadRight(10) + " |" + c.Model.PadRight(20) + " |" + c.Office.PadRight(10) + " |" + c.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + c.Price.ToString().PadRight(15) + " |" + c.Currency.PadRight(15) + " |" + c.LocalPrice);
+                Console.WriteLine(c.Type.PadRight(10) + " |" + c.Brand.PadRight(10) + " |" + c.Model.PadRight(20) + " |" + c.Office.PadRight(10) + " |" + c.Year.ToString("yyyy-MM-dd").PadRight(15) + " |" + c.Price.ToString().PadRight(15) + " |" + c.Currency.PadRight(15) + " |" + c.LocalPrice.ToString("C"));
                 Console.ResetColor();
             }
             // Level 3 
-            while (true)
+            List<Currency> showCurrency = new List<Currency>();
+            Currency c1 = new Currency("Spain","EUR", 801.65,"USD", 845.12);
+            Currency c2 = new Currency("Sweden", "SEK", 50.65,"USD", 5.06);
+            showCurrency.Add(c1);
+            showCurrency.Add(c2);
+
+            //Filtered by currency 
+            List<Currency> filteredCurrency = showCurrency.Where(c => c.Country == "Spain").ToList();
+            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine("Office Country".PadRight(15)+ "|" + "Currency".PadRight(15) + "|" + "Price".PadRight(10) + "|" + "USD");
+            Console.WriteLine("----------------------------------------------");
+            foreach (Currency curren1 in filteredCurrency)
             {
-                Console.Write("Enter Currency :");
-                string categoryInput = Console.ReadLine();
-                if (categoryInput.ToLower().Trim() == "EUR")
-                {
-                   
-                }
+                Console.WriteLine(curren1.Country.PadRight(15) + curren1.Curren.PadRight(15) + curren1.Price.ToString().PadRight(10) + curren1.UsdPrice.ToString());
+            }
+            List<Currency> filteredCurrency1 = showCurrency.Where(c => c.Country == "Sweden").ToList();
+            foreach (Currency curren2 in filteredCurrency1)
+            {
+                Console.WriteLine(curren2.Country.PadRight(15) + curren2.Curren.PadRight(15) + curren2.Price.ToString("C").PadRight(10) + curren2.UsdPrice);
             }
         }
     }
@@ -88,6 +99,7 @@ namespace MiniProject_AssetTracking
         public int Price { get; set; }
         public string Currency { get; set; }
         public double LocalPrice { get; set; }
+        public string Country { get; set; }
     }
     class Phone : Function  // inherits from Function
     {
@@ -116,5 +128,22 @@ namespace MiniProject_AssetTracking
             Currency = currency;
             LocalPrice = localPrice;
         }
+    }
+    class Currency  // class for Level 3 
+    {
+        public Currency(string country, string curren, double price, string usd, double usdprice)
+        {
+             Country = country;
+             Curren = curren;
+             Price = price;
+            USD = usd;
+            UsdPrice = usdprice;
+        }
+        public string Country { get; set; }
+        public string Curren { get; set; }
+        public double Price { get; set; }
+        public string USD { get; set; }
+        public double UsdPrice { get; set; }
+
     }
 }
