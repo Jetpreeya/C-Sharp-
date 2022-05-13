@@ -9,11 +9,11 @@ namespace TodoList
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to TODO List");
-            Console.WriteLine("You have X tasks todo and Y tasks are done!");
+            Console.WriteLine("You have X tasks todo and Y tasks are done!"); // Maybe use boolean 
             Console.WriteLine("Pick an option :");
-            Console.WriteLine("(1) Show task list (by date or project) ");
+            Console.WriteLine("(1) Show task list (by date or project) "); 
             Console.WriteLine("(2) Add New Task ");
-            Console.WriteLine("(3) Edit Task(update, mark as done, remove) "); /*listTodo.RemoveAt(5);*/ /*for remove*/
+            Console.WriteLine("(3) Edit Task(update, mark as done, remove) "); /*listTodo.RemoveAt(Something you want to delete);*/ /*for remove*/
             Console.WriteLine("(4) Save and Quit ");
 
             List<Todo> listTodo = new List<Todo>();
@@ -23,11 +23,11 @@ namespace TodoList
                 {
                     Console.Write("Input option: ");
                     string categoryInput = Console.ReadLine();
-                    if (categoryInput.ToLower().Trim() == "4")
+                    if (categoryInput.ToLower().Trim() == "4") // Optionnumber 4 break =>  Save and Quit
                     {
                         break;
                     }
-                    else if (categoryInput.ToLower().Trim() == "2")
+                    else if (categoryInput.ToLower().Trim() == "2") // Option number 2 
                     {
                         Console.Write("Date (yyyy-MM-dd): ");
                         string date = Console.ReadLine();
@@ -37,7 +37,6 @@ namespace TodoList
                         }
 
                         DateTime dt = Convert.ToDateTime(date);
-
                         Console.Write("List order number: ");
                         string id = Console.ReadLine();
                         if (id.ToLower().Trim() == "4")
@@ -54,7 +53,19 @@ namespace TodoList
                         Todo list = new Todo(dt, Id, name);
                         listTodo.Add(list);
                     }
-                    else if (categoryInput.ToLower().Trim() == "1")
+                    else if (categoryInput.ToLower().Trim() == "1") // Option number 1 
+                    {
+                        List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
+                        Console.WriteLine("Show task list (by date)");
+                        Console.WriteLine("-----------------------------------------------");
+                        Console.WriteLine("Date".PadRight(20) + "|" + "Id".PadRight(10) + "|" + "List".PadRight(10));
+                        Console.WriteLine("-----------------------------------------------");
+                        foreach (Todo person in sortedByDate)
+                        {
+                            Console.WriteLine(person.Dt.ToString("yyyy-MM-dd").PadRight(20) + "|" + person.OrderNum.ToString().PadRight(10) + "|" + person.List.PadRight(10));
+                        }
+                    }
+                    else if (categoryInput.ToLower().Trim() == "3") // Option number 3 remove // will be continouse here. use RemoveAt
                     {
                         List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
                         Console.WriteLine("Show task list (by date)");
@@ -78,7 +89,6 @@ namespace TodoList
                 }
                 Console.ReadLine();
             }
-
         }
         class Todo
         {
@@ -88,7 +98,6 @@ namespace TodoList
                 OrderNum = num;
                 List = list;
             }
-
             public DateTime Dt { get; set; }
             public int OrderNum { get; set; }
             public string List { get; set; }
