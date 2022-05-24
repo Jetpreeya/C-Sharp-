@@ -1,6 +1,7 @@
 using System;
 using System.Data.SqlClient;
 
+//string ConnectionString = @"Data Source = S4D01; Initial Catalog = Northwind; Integrated Security = True";// 
 string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
 
 SqlConnection Connection = new SqlConnection(ConnectionString);
