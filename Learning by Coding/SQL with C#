@@ -1,8 +1,6 @@
 using System;
 using System.Data.SqlClient;
 
-
-
 string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
 
 SqlConnection Connection = new SqlConnection(ConnectionString);
@@ -27,4 +25,3 @@ Connection.Open();
 Command.CommandText = "insert into categories (categoryname, description)" + "values('Shoes', 'Nice shoes')";
 Command.ExecuteNonQuery();
 Connection.Close();
-
