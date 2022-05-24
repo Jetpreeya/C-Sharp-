@@ -1,0 +1,30 @@
+using System;
+using System.Data.SqlClient;
+
+
+
+string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
+
+SqlConnection Connection = new SqlConnection(ConnectionString);
+Connection.Open();
+
+SqlCommand Command = new SqlCommand("SELECT * FROM categories", Connection);
+
+
+var Result = Command.ExecuteReader();
+
+
+while (Result.Read())
+{
+    var CatName = Result.GetValue(1).ToString();
+    var CatDesc = Result.GetValue(2).ToString();
+    Console.WriteLine(CatName.PadRight(15) + " " + CatDesc);
+}
+        
+Connection.Close();
+
+Connection.Open();
+Command.CommandText = "insert into categories (categoryname, description)" + "values('Shoes', 'Nice shoes')";
+Command.ExecuteNonQuery();
+Connection.Close();
+
