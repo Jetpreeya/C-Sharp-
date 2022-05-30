@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TodoList
 {
-     internal class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -67,33 +67,52 @@ namespace TodoList
                     }
                     else if (categoryInput.ToLower().Trim() == "3") // Option number 3 remove // will be continouse here. use RemoveAt
                     {
-                        Console.WriteLine("Which list do you want to delete ?");
-                        string removeInput = Console.ReadLine();
-                        if (removeInput == "1")
+                        Console.WriteLine("Do you want to update or remove ?");
+                        Console.WriteLine("If update input (I)");
+                        Console.WriteLine("If remove input (R)");
+                        string partThreeInput = Console.ReadLine();
+
+                        while (true)
                         {
-                            listTodo.RemoveAt(0); // Remove at Index 2 
-                            Console.WriteLine("No you delete Todo list number 1");
-                        }
-                        else if (removeInput == "2")
+                            if (partThreeInput.ToUpper().Trim() == "I")
+                            {
+                                //update code
+                            }
+
+                            else if (partThreeInput.ToUpper().Trim() == "R") //Becareful with ToUpper and ToLower when you input.
+                            {
+                                Console.WriteLine("Which list do you want to delete ?");
+                                string removeInput = Console.ReadLine();
+                                if (removeInput == "1")
                                 {
-                            listTodo.RemoveAt(1); // Remove at Index 2 
-                            Console.WriteLine("No you delete Todo list number 1");
-                        }
-                        else if (removeInput == "3")
-                        {
-                            listTodo.RemoveAt(2); // Remove at Index 2 
-                            Console.WriteLine("No you delete Todo list number 3");
-                        }
-                        List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
-                        Console.WriteLine("Show task list (by date)");
-                        Console.WriteLine("-----------------------------------------------");
-                        Console.WriteLine("Date".PadRight(20) + "|" + "Id".PadRight(10) + "|" + "List".PadRight(10));
-                        Console.WriteLine("-----------------------------------------------");
-                        foreach (Todo person in sortedByDate)
-                        {
-                            Console.WriteLine(person.Dt.ToString("yyyy-MM-dd").PadRight(20) + "|" + person.OrderNum.ToString().PadRight(10) + "|" + person.List.PadRight(10));
+                                    listTodo.RemoveAt(0); // Remove at Index 0 
+                                    Console.WriteLine("No you delete Todo list number 1");
+                                }
+                                else if (removeInput == "2")
+                                {
+                                    listTodo.RemoveAt(1); // Remove at Index 1 
+                                    Console.WriteLine("No you delete Todo list number 1");
+                                }
+                                else if (removeInput == "3")
+                                {
+                                    listTodo.RemoveAt(2); // Remove at Index 2 
+                                    Console.WriteLine("No you delete Todo list number 3");
+                                }
+                                List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
+                                Console.WriteLine("Show task list (by date)");
+                                Console.WriteLine("-----------------------------------------------");
+                                Console.WriteLine("Date".PadRight(20) + "|" + "Id".PadRight(10) + "|" + "List".PadRight(10));
+                                Console.WriteLine("-----------------------------------------------");
+                                foreach (Todo person in sortedByDate)
+                                {
+                                    Console.WriteLine(person.Dt.ToString("yyyy-MM-dd").PadRight(20) + "|" + person.OrderNum.ToString().PadRight(10) + "|" + person.List.PadRight(10));
+                                }
+                            }
+
+
                         }
                     }
+
                 }
 
                 List<Todo> sortedDate = listTodo.OrderBy(personn => personn.Dt).ToList();
