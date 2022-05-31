@@ -6,6 +6,8 @@ namespace TodoList
 {
     internal class Program
     {
+        private static object dt;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to TODO List");
@@ -77,29 +79,28 @@ namespace TodoList
                             if (partThreeInput.ToUpper().Trim() == "U") //Update part
                             {
                                 Console.WriteLine("Which list do you want to update ?");
-                                string updateInput = Console.ReadLine();
-                                int UpdateList = Convert.ToInt32(updateInput) - 1;
+                                string Id = Console.ReadLine();
+                                int UpdateList = Convert.ToInt32(Id) - 1;
                                 Console.WriteLine("New List : ");
                                 string name = Console.ReadLine();
-                                Console.WriteLine("Now you updated Todo list number " + updateInput);
-                                Todo list = new Todo(name);
-                                listTodo.Add(list);
-
-                                List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
-                                Console.WriteLine("Show task list (by date)");
+                                Console.WriteLine("Now you updated Todo list number " + Id);
+                                List<Todo> sortedByName = listTodo.OrderBy(personn => personn.Dt).ToList();
+                                Console.WriteLine("New Update");
                                 Console.WriteLine("-----------------------------------------------------");
-                                Console.WriteLine("Date".PadRight(20) + "|" + "Id".PadRight(10) + "|" + "List".PadRight(10));
+                                Console.WriteLine("Id".PadRight(10) + "|" + "List".PadRight(10));
                                 Console.WriteLine("-----------------------------------------------------");
-                                foreach (Todo person in sortedByDate)
-                                {
-                                    Console.WriteLine(person.Dt.ToString("yyyy-MM-dd").PadRight(20) + "|" + person.OrderNum.ToString().PadRight(10) + "|" + person.List.PadRight(10));
-                                }
+                                Console.WriteLine(Id.PadRight(10) + "|" + name);
+                            }
+                            else if (partThreeInput.ToLower().Trim() == "4")
+                            {
+                                break;
                             }
 
                             else if (partThreeInput.ToUpper().Trim() == "R")
                             {
                                 Console.WriteLine("Which list do you want to delete ?");
                                 string removeInput = Console.ReadLine();
+
                                 if (removeInput == "1")
                                 {
                                     listTodo.RemoveAt(0); // Remove at Index 0 
@@ -115,6 +116,10 @@ namespace TodoList
                                     listTodo.RemoveAt(2); // Remove at Index 2 
                                     Console.WriteLine("Now you delete Todo list number 3");
                                 }
+                                else if(removeInput.ToLower().Trim() == "4")
+                                {
+                                    break;
+                                }
                                 List<Todo> sortedByDate = listTodo.OrderBy(personn => personn.Dt).ToList();
                                 Console.WriteLine("Show task list (by date)");
                                 Console.WriteLine("-----------------------------------------------------");
@@ -125,13 +130,9 @@ namespace TodoList
                                     Console.WriteLine(person.Dt.ToString("yyyy-MM-dd").PadRight(20) + "|" + person.OrderNum.ToString().PadRight(10) + "|" + person.List.PadRight(10));
                                 }
                             }
-
-
                         }
                     }
-
                 }
-
                 List<Todo> sortedDate = listTodo.OrderBy(personn => personn.Dt).ToList();
                 Console.WriteLine("-----------------------------------------------");
                 Console.WriteLine("Date".PadRight(20) + "|" + "Id".PadRight(10) + "|" + "List".PadRight(10));
@@ -147,11 +148,10 @@ namespace TodoList
         {
             private string name;
 
-            public Todo(string name)
+            public Todo(object dt1, object dt, string name)
             {
                 this.name = name;
             }
-
             public Todo(DateTime dt, int num, string list)
             {
                 Dt = dt;
