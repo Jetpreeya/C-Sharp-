@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AssetTrackingDatabase
 {
-    internal class Computer : Products
+    internal class Phone : Products
     {
-        public Computer(string type, string brand, string model, string office, DateTime year, int price, string currency, double localPrice)
+        public Phone(string type, string brand, string model, string office, DateTime year, int price, string currency, double localPrice)
         {
             TypeProduct = type;
             Brand = brand;
@@ -21,3 +21,4 @@ namespace AssetTrackingDatabase
         }
     }
 }
+
