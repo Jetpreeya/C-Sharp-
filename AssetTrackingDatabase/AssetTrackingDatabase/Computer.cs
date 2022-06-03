@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace AssetTrackingDatabase
 {
-    internal class Computer : Function
+    internal class Computer : Products
     {
         public Computer(string type, string brand, string model, string office, DateTime year, int price, string currency, double localPrice)
         {
-            Type = type;
+            TypeProduct = type;
             Brand = brand;
             Model = model;
             Office = office;
-            Year = year;
-            Price = price;
+            Purchase = year;
+            PriceByUSD = price;
             Currency = currency;
             LocalPrice = localPrice;
         }
