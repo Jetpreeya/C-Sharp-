@@ -37,9 +37,24 @@ while (Result.Read())
     newProd.LocalPrice = Convert.ToInt32(Result["LocalPrice"].ToString());
 
     orderedList.Add(newProd);
-    orderedList = orderedList.OrderBy(x => x.TypeProduct).ToList();
 
     Console.WriteLine(newProd.ProductID.ToString().PadRight(10) + ": " + newProd.TypeProduct.PadRight(15) + ": " + newProd.Brand.PadRight(15) + ": " + newProd.Model.PadRight(20) + ": " + newProd.Office.PadRight(15) + ": " + newProd.Purchase.ToString("yyyy-MM-dd").PadRight(20) + ": " + newProd.PriceByUSD.ToString().PadRight(15) + ": " + newProd.Currency.PadRight(15) + ":" + newProd.LocalPrice);
+    
 }
 
+//Order by type
+orderedList = orderedList.OrderBy(x => x.TypeProduct).ToList();
+Console.WriteLine("----------------------------------------------------------------------------------------------------------");
+Console.WriteLine("Sort List by Type");
+Console.WriteLine("----------------------------------------------------------------------------------------------------------");
+
+foreach (Products b in orderedList)
+{
+    Console.WriteLine(b.ProductID.ToString().PadRight(10) + " |" + b.TypeProduct.PadRight(15) + " |" + b.Brand.PadRight(15) + " |" + b.Model.PadRight(20) + " |" + b.Office.PadRight(15) + " |" + b.Purchase.ToString("yyyy-MM-dd").PadRight(20) + " |" + b.PriceByUSD.ToString().PadRight(15) + " |" + b.Currency.PadRight(15) + " |" + b.LocalPrice);
+    Console.ResetColor();
+}
+
+
+
 Connection.Close();
+
