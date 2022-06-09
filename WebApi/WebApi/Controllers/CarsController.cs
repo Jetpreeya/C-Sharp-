@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
@@ -38,5 +39,35 @@ namespace WebApi.Controllers
             Car Car = CarData.FirstOrDefault(x => x.Id == id); //Lamda expession (x => x.Id == id)
             return Car;
         }
+
+        [HttpPost]
+        [Route("/addCar")]
+        public List<Car> AddCar(int id, string brand, string model)
+        {
+            Car Car = new Car(id, brand, model);
+            CarData.Add(Car);
+            return CarData;
+        }
+
+        [HttpPut]
+        [Route("/updatecar")]
+        public List<Car> UpdateCar(int id, string brand, string model)
+        {
+            Car Car = CarData.FirstOrDefault(x => x.Id == id);
+            int CarIndex = CarData.IndexOf(Car);
+            CarData[CarIndex].Brand = brand;
+            CarData[CarIndex].Model = model;
+            return CarData;
+        }
+
+        [HttpDelete]
+        [Route("/deletecar/{id}")]
+        public List<Car> DeleteCar(int id)
+        {
+            Car Car = CarData.FirstOrDefault(x => x.Id == id);
+            CarData.Remove(Car);
+            return CarData;
+        }
+
     }
 }
